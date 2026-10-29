@@ -6,11 +6,15 @@ export const COLORS = {
   green: '#02e943',
   pink: '#ff3fb4',
   violet: '#7803ff',
-  white: '#ffffff',
+  white: 'var(--chart-primary)',
 };
 
-const AXIS = 'rgba(255,255,255,.42)';
-const GRID = 'rgba(255,255,255,.08)';
+const AXIS = 'var(--chart-axis)';
+const GRID = 'var(--chart-grid)';
+
+function onBar(color: string): string {
+  return color === COLORS.green || color === COLORS.pink ? '#111318' : '#fff';
+}
 
 export interface Series {
   name: string;
@@ -112,9 +116,9 @@ export function HBars({
         const yy = 8 + i * rowH;
         return (
           <g key={it.label + i}>
-            <text x="0" y={yy + 16} fill="rgba(255,255,255,.68)" fontSize="11.5">{it.label}</text>
+            <text x="0" y={yy + 16} fill="var(--chart-label)" fontSize="11.5">{it.label}</text>
             <rect x={labelWidth} y={yy} width={w} height="24" fill={it.color ?? COLORS.blue} />
-            <text x={labelWidth + w + 6} y={yy + 16} fill="#fff" fontSize="11.5">{it.text}</text>
+            <text x={labelWidth + w + 6} y={yy + 16} fill="var(--chart-text)" fontSize="11.5">{it.text}</text>
           </g>
         );
       })}
@@ -140,14 +144,14 @@ export function StackBars({
           const yy = 12 + i * rowH;
           return (
             <g key={r.label}>
-              <text x="0" y={yy + 16} fill="rgba(255,255,255,.68)" fontSize="12">{r.label}</text>
+              <text x="0" y={yy + 16} fill="var(--chart-label)" fontSize="12">{r.label}</text>
               {total > 0 ? r.parts.map((p) => {
                 const w = (p.value / total) * barW;
                 const g = (
                   <g key={p.name}>
                     <rect x={x} y={yy} width={w} height="24" fill={p.color} />
                     {w > 30 && (
-                      <text x={x + w / 2} y={yy + 16} fill="#fff" fontSize="11" textAnchor="middle">
+                      <text x={x + w / 2} y={yy + 16} fill={onBar(p.color)} fontSize="11" textAnchor="middle">
                         {Math.round((p.value / total) * 100)}%
                       </text>
                     )}
