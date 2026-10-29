@@ -13,6 +13,7 @@ import X from './pages/X';
 import Creatividades from './pages/Creatividades';
 import Producto from './pages/Producto';
 import Medicion from './pages/Medicion';
+import ThemeToggle from './ThemeToggle';
 
 interface PageDef {
   id: string;
@@ -129,6 +130,7 @@ export default function Dashboard() {
           Las fuentes se actualizan una vez por día ·{' '}
           <button type="button" className="linkbtn" onClick={logout}>Cerrar sesión</button>
         </div>
+        <ThemeToggle compact />
       </header>
       <div className="layout">
         <nav className="pages" aria-label="Páginas del dashboard">

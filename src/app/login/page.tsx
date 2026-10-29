@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function LoginPage() {
   const [password, setPassword] = useState('');
@@ -32,6 +33,7 @@ export default function LoginPage() {
 
   return (
     <div className="login">
+      <div className="login-theme"><ThemeToggle /></div>
       <form onSubmit={submit}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo.png" alt="Civil Mafia" className="logo" width={120} height={34} />
